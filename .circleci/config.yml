@@ -96,13 +96,27 @@ jobs:
           command: |
             cd backend
             npm install
-            npm run test
-       - slack/notify:
-          channel: https://udapeople-drb9027.slack.com/archives/C05M3DDC37C
-          event: fail     
+            npm run test  
       - save_cache:
           paths: [backend/node_modules]
           key: backend-test
+      - slack/notify:
+    event: fail
+    custom: | # your custom notification goes here
+      {
+        "blocks": [
+          {
+            "type": "section",
+            "fields": [
+              {
+                "type": "plain_text",
+                "text": "*This is a text notification*",
+                "emoji": true
+              }
+            ]
+          }
+        ]
+      }
             
   scan-frontend:
     docker:
