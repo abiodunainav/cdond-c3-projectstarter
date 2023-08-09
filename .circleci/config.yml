@@ -322,7 +322,6 @@ workflows:
           requires: [build-frontend]
       - test-backend:
           requires: [build-backend]
-          context: UdaPeople
       - scan-backend:
           requires: [build-backend]
       - scan-frontend:
