@@ -90,7 +90,6 @@ jobs:
   test-backend:
     docker:
       - image: circleci/node:13.8.0
-      - image: 'cimg/base:stable'
     steps:
       - checkout
       - restore_cache:
@@ -104,10 +103,6 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-test
-      - slack/notify:
-          channel: https://udapeople-drb9027.slack.com/archives/C05M3DDC37C
-          event: fail
-          template: basic_fail_1
            
   scan-frontend:
     docker:
@@ -149,14 +144,6 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: scan-backend
-  notify:
-    docker:
-      - image: cimg/base:2021.04 
-    steps:
-      - slack/notify:
-          channel: https://udapeople-drb9027.slack.com/archives/C05M3DDC37C
-          event: fail
-          template: basic_fail_1
 
 #   deploy-infrastructure:
 #     docker:
@@ -356,6 +343,4 @@ workflows:
       #     requires: [smoke-test]
       # - cleanup:
       #     requires: [cloudfront-update]
-      - notify:
-          context: Udapeople
-          requires: [test-backend]
+      
