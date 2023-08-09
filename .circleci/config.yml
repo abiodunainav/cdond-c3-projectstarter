@@ -356,8 +356,6 @@ workflows:
       #     requires: [smoke-test]
       # - cleanup:
       #     requires: [cloudfront-update]
-  send-notification:
-    jobs:
       - notify:
           context: Udapeople
           requires: [test-backend]
