@@ -85,11 +85,12 @@ jobs:
             npm run test
       - save_cache:
           paths: [frontend/node_modules]
-          key: frontend-test
+          key: frontend-test      
                 
   test-backend:
     docker:
       - image: circleci/node:13.8.0
+      - image: 'cimg/base:stable'
     steps:
       - checkout
       - restore_cache:
@@ -107,8 +108,7 @@ jobs:
           channel: https://udapeople-drb9027.slack.com/archives/C05M3DDC37C
           event: fail
           template: basic_fail_1
-      
-            
+           
   scan-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -325,6 +325,7 @@ workflows:
           requires: [build-frontend]
       - test-backend:
           requires: [build-backend]
+          context: UdaPeople   
 
       - scan-backend:
           requires: [build-backend]
@@ -349,8 +350,4 @@ workflows:
       #     requires: [smoke-test]
       # - cleanup:
       #     requires: [cloudfront-update]
-  send-notification:
-    jobs:
-      - notify:
-          context: UdaPeople     
-    
+  
