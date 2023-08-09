@@ -98,21 +98,6 @@ jobs:
             npm install
             npm run test
        - slack/notify:
-          custom: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "plain_text",
-                      "text": "*This is a text notification*",
-                      "emoji": true
-                    }
-                  ]
-                }
-              ]
-            }
           channel: https://udapeople-drb9027.slack.com/archives/C05M3DDC37C
           event: fail     
       - save_cache:
