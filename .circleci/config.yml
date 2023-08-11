@@ -57,7 +57,7 @@ commands:
               cd ~/project/backend
               npm install
               npm run migrations:revert
-           
+           f1
 jobs:
   build-frontend:
     docker:
