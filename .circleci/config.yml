@@ -58,16 +58,6 @@ commands:
               npm install
               npm run migrations:revert
            fi
-  install_nodejs:
-    description: Install Node.js 13
-    steps:
-      - run:
-          name: Install Node.js 13
-          command: |
-            curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-            sudo apt install -y nodejs 
-                   
-            
 jobs:
   build-frontend:
     docker:
@@ -246,21 +236,21 @@ jobs:
       - destroy-environment
 
 
-  run-migrations:
-    docker:
-      # Docker image here that supports NodeJS
-    steps:
-      # Checkout code from git
-      - run:
-          name: Run migrations
-          command: |
-            # Your code here
-            exit 1
-      - run:
-          name: Send migration results to memstash
-          command: |
-            # Your code here
-            exit 1
+  # run-migrations:
+  #   docker:
+  #     # Docker image here that supports NodeJS
+  #   steps:
+  #     # Checkout code from git
+  #     - run:
+  #         name: Run migrations
+  #         command: |
+  #           # Your code here
+  #           exit 1
+  #     - run:
+  #         name: Send migration results to memstash
+  #         command: |
+  #           # Your code here
+  #           exit 1
      # Here's where you will add some code to rollback on failure      
 
 #   deploy-frontend:
@@ -379,8 +369,8 @@ workflows:
               only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
-      - run-migrations:
-          requires: [configure-infrastructure]
+      # - run-migrations:
+      #     requires: [configure-infrastructure]
       # - deploy-frontend:
       #     requires: [run-migrations]
       # - deploy-backend:
