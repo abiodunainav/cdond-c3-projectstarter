@@ -49,17 +49,15 @@ commands:
       - run:
           name: Revert migrations
           when: on_fail
-          # Add when this will run
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-
             SUCCESS=$(curl --insecure "https://kvdb.io/16dAiSVamrZg8atoi4XxFi/migration_<<parameters.workflow_id>>")
             if(( $SUCCESS==1 )); 
             then
               cd ~/project/backend
               npm install
               npm run migrations:revert
-          fi
+           fi
   install_nodejs:
     description: Install Node.js 13
     steps:
